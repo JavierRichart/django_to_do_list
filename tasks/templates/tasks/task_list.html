@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="panel-tareas">
+      <h1>Task List</h1>
+      <ul class="lista-tareas">
+        <div item-tareas>
+          {% for task in tasks %}
+          <li>
+            {{ task.title }} - <span>{% if task.completed %}Completed{% else %}Pending</span>
+            {% endif %}
+          </li>
+          <a class="action edit" href="{% url 'edit_task' task.id %}">Edit</a>
+          <a class="action delete" href="{% url 'delete_task' task.id %}">Delete</a>
+          {% endfor %}
+        </div>
+      </ul>
+      <a class="add-task" href="{% url 'add_task' %}">Add Task</a>
+    </div>
+  </body>
+</html>
